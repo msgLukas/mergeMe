@@ -8,6 +8,7 @@ public class HelloWorld {
     public static void main(String[] args) {
         // Register all available utilities
         utilities.add(new IBANFormatter());
+        utilities.add(new PasswordValidator());
         
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -17,7 +18,19 @@ public class HelloWorld {
         System.out.println("=================================\n");
         
         while (running) {
-            displayMenu();
+            System.out.println("Available Utilities:");
+            System.out.println("--------------------");
+        
+            for (int i = 0; i < utilities.size(); i++) {
+                Utility utility = utilities.get(i);
+                System.out.printf("%d. %s - %s%n", 
+                    i + 1, 
+                    utility.getName(), 
+                    utility.getDescription());
+            }
+            
+            System.out.println("0. Exit");
+            System.out.println();
             System.out.print("Select an option: ");
             
             String input = scanner.nextLine();
@@ -40,21 +53,5 @@ public class HelloWorld {
         }
         
         scanner.close();
-    }
-    
-    private static void displayMenu() {
-        System.out.println("Available Utilities:");
-        System.out.println("--------------------");
-        
-        for (int i = 0; i < utilities.size(); i++) {
-            Utility utility = utilities.get(i);
-            System.out.printf("%d. %s - %s%n", 
-                i + 1, 
-                utility.getName(), 
-                utility.getDescription());
-        }
-        
-        System.out.println("0. Exit");
-        System.out.println();
     }
 }
